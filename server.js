@@ -13,7 +13,14 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors());
+
+app.use((_req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+  
+    next();
+  });
+// app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API endpoint to retrieve data from external API
